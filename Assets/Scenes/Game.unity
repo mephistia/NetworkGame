@@ -8590,28 +8590,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1376343896666329167, guid: 717c8a9da7879ce4aa4cf8c222a5ad31,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.061320424
-      objectReference: {fileID: 0}
-    - target: {fileID: 1376343896666329167, guid: 717c8a9da7879ce4aa4cf8c222a5ad31,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 4.444784
-      objectReference: {fileID: 0}
-    - target: {fileID: 1376343896666329167, guid: 717c8a9da7879ce4aa4cf8c222a5ad31,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0.00000333786
-      objectReference: {fileID: 0}
-    - target: {fileID: 1376343896666329167, guid: 717c8a9da7879ce4aa4cf8c222a5ad31,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 4.1827936
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1376343896666329167, guid: 717c8a9da7879ce4aa4cf8c222a5ad31, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 717c8a9da7879ce4aa4cf8c222a5ad31, type: 3}
 --- !u!1 &1250903906
 GameObject:
@@ -12568,7 +12547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowDebugText: 1
+  m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
@@ -12590,52 +12569,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1661303765 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1376343896666329162, guid: 717c8a9da7879ce4aa4cf8c222a5ad31,
-    type: 3}
-  m_PrefabInstance: {fileID: 1120865167}
-  m_PrefabAsset: {fileID: 0}
---- !u!60 &1661303767
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1661303765}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10, y: 10}
-    newSize: {x: 10, y: 10}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.1683476, y: -2.3695688}
-      - {x: 1.1507639, y: -2.0256128}
-      - {x: 2.01, y: -1.2099999}
-      - {x: -1.2040776, y: 1.9748672}
-      - {x: -2.0973234, y: 1.1693686}
-      - {x: -2.29, y: 0.41}
-      - {x: -2.2380705, y: -0.7692423}
-      - {x: -1.6366916, y: -1.7359848}
-      - {x: -1.14, y: -2.03}
-    - - {x: 1.9978707, y: -1.1989772}
-      - {x: 2.3629763, y: -0.007370793}
-      - {x: 2.0156548, y: 1.2188114}
-      - {x: 1.0262958, y: 2.1391435}
-      - {x: -0.19836587, y: 2.370509}
-      - {x: -1.2067518, y: 1.9712064}
 --- !u!4 &1661303770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1376343896666329164, guid: 717c8a9da7879ce4aa4cf8c222a5ad31,

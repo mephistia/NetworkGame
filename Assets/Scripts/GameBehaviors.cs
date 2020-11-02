@@ -22,4 +22,14 @@ public class GameBehaviors
 
         _transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));
     }
+
+    // Atirar
+    public static void Shoot(GameObject _projectile, Vector3 _direction, Transform _fromTransform)
+    {
+
+        GameObject proj = GameObject.Instantiate(_projectile, _fromTransform.position, Quaternion.identity);
+        proj.GetComponent<Projectile>()._direction = _direction;
+        Debug.Log($"Projétil lançado na direção {_direction}");
+    }
+
 }
