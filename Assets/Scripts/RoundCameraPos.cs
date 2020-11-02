@@ -4,7 +4,7 @@ using Cinemachine;
 public class RoundCameraPos : CinemachineExtension
 {
 
-    public float PixelsPerUnit = 16; // unidade de pixel nos tiles
+    public float PixelsPerUnit = 32; // unidade de pixel nos tiles
 
 
     protected override void PostPipelineStageCallback(
