@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
 
 
 // Classe com métodos para converter tipos de dados (escrita e leitura) para bytes
@@ -11,14 +12,17 @@ namespace GameServer
     public enum ServerPackets
     {
         welcome = 1,
-        udpTest
+        spawnPlayer,
+        playerPosition,
+        playerRotation,
+        playerVelocity
     }
 
     // Do cliente para server
     public enum ClientPackets
     {
         welcomeReceived = 1,
-        udpReceived
+        playerMovement
     }
 
 
@@ -160,6 +164,27 @@ namespace GameServer
         {
             Write(_value.Length);
             buffer.AddRange(Encoding.ASCII.GetBytes(_value));
+        }
+
+        public void Write(Vector3 _value)
+        {
+            Write(_value.x);
+            Write(_value.y);
+            Write(_value.z);
+        }
+
+        public void Write(Vector2 _value)
+        {
+            Write(_value.x);
+            Write(_value.y);
+        }
+
+        public void Write(Quaternion _value)
+        {
+            Write(_value.x);
+            Write(_value.y);
+            Write(_value.z);
+            Write(_value.w);
         }
         #endregion
 
@@ -314,6 +339,23 @@ namespace GameServer
                 throw new Exception("Could not read value of type 'string'!");
             }
         }
+
+
+        public Vector3 ReadVector3(bool _moveReadPos = true)
+        {
+            return new Vector3(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+        }
+
+        public Vector2 ReadVector2(bool _moveReadPos = true)
+        {
+            return new Vector2(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+        }
+
+        public Quaternion ReadQuaternion(bool _moveReadPos = true)
+        {
+            return new Quaternion(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+        }
+
         #endregion
 
         private bool disposed = false;

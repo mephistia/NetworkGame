@@ -55,6 +55,7 @@ public class PlayerInput : MonoBehaviour
     {
         _movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         return _movementInput.normalized;
+
     }
 
 
