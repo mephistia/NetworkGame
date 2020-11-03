@@ -47,6 +47,5 @@ public class ClientHandle : MonoBehaviour
         Vector2 _velocity = _packet.ReadVector2();
 
         GameManager.players[_id].GetComponent<Rigidbody2D>().velocity = _velocity;
-        Debug.Log($"Player id {_id} is moving with a velocity of {GameManager.players[_id].GetComponent<Rigidbody2D>().velocity}.");
     }
 }

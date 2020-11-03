@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject localPlayerPrefab;
     public GameObject playerPrefab;
+    private GameObject virtualCamera;
+    private Vector2 velocity;
 
     private void Awake()
     {
@@ -32,6 +36,8 @@ public class GameManager : MonoBehaviour
         if (_id == Client.instance.myId)
         {
             _player = Instantiate(localPlayerPrefab, _position, _rotation);
+            virtualCamera = GameObject.FindGameObjectWithTag("VirtualCamera");
+            virtualCamera.GetComponent<CinemachineVirtualCamera>().Follow = _player.transform;
         }
         else
         {
@@ -43,4 +49,7 @@ public class GameManager : MonoBehaviour
         _player.GetComponent<PlayerManager>().username = _username;
         players.Add(_id, _player.GetComponent<PlayerManager>());
     }
+
+
+
 }
