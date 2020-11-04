@@ -300,7 +300,9 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.welcome, ClientHandle.Welcome },
             {(int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             {(int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
-            {(int)ServerPackets.playerVelocity, ClientHandle.PlayerVelocity }
+            {(int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
+            {(int)ServerPackets.playerVelocity, ClientHandle.PlayerVelocity },
+            {(int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected }
         };
         Debug.Log("Initialized packets.");
 

@@ -46,5 +46,14 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void PlayerRotation(float _angle)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerRotation))
+        {
+            _packet.Write(_angle);
+
+            SendUDPData(_packet);
+        }
+    }
     #endregion
 }

@@ -15,14 +15,17 @@ namespace GameServer
         spawnPlayer,
         playerPosition,
         playerRotation,
-        playerVelocity
+        playerVelocity,
+        playerDisconnected
     }
 
     // Do cliente para server
     public enum ClientPackets
     {
         welcomeReceived = 1,
-        playerMovement
+        playerMovement,
+        playerMouse,
+        playerRotation
     }
 
 
