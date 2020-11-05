@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,11 +42,10 @@ public class GameManager : MonoBehaviour
         else
         {
             _player = Instantiate(playerPrefab, _position, _rotation);
-
         }
 
-        _player.GetComponent<PlayerManager>().id = _id;
-        _player.GetComponent<PlayerManager>().username = _username;
+        _player.GetComponent<PlayerManager>().Initialize(_id, _username);
+        _player.GetComponentInChildren<TextMeshPro>().SetText(_username);
         players.Add(_id, _player.GetComponent<PlayerManager>());
     }
 

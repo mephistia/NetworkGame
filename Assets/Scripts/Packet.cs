@@ -16,7 +16,9 @@ namespace GameServer
         playerPosition,
         playerRotation,
         playerVelocity,
-        playerDisconnected
+        playerDisconnected,
+        playerHealth,
+        playerRespawned
     }
 
     // Do cliente para server
@@ -24,7 +26,7 @@ namespace GameServer
     {
         welcomeReceived = 1,
         playerMovement,
-        playerMouse,
+        playerShoot,
         playerRotation
     }
 
