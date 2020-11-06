@@ -304,7 +304,10 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.playerVelocity, ClientHandle.PlayerVelocity },
             {(int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
             {(int)ServerPackets.playerHealth, ClientHandle.PlayerHealth },
-            {(int)ServerPackets.playerRespawned, ClientHandle.PlayerRespawned }
+            {(int)ServerPackets.playerRespawned, ClientHandle.PlayerRespawned },
+            {(int)ServerPackets.spawnProjectile, ClientHandle.SpawnProjectile },
+            {(int)ServerPackets.projectilePosition, ClientHandle.ProjectilePosition },
+            {(int)ServerPackets.projectileDamaged, ClientHandle.ProjectileDamaged }
         };
         Debug.Log("Initialized packets.");
 

@@ -18,7 +18,10 @@ namespace GameServer
         playerVelocity,
         playerDisconnected,
         playerHealth,
-        playerRespawned
+        playerRespawned,
+        spawnProjectile,
+        projectilePosition,
+        projectileDamaged
     }
 
     // Do cliente para server

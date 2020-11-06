@@ -27,8 +27,8 @@ public class GameBehaviors
     public static void Shoot(GameObject _projectile, Vector3 _direction, Transform _fromTransform)
     {
 
-        GameObject proj = GameObject.Instantiate(_projectile, _fromTransform.position, Quaternion.identity);
-        proj.GetComponent<Projectile>()._direction = _direction;
+        //GameObject proj = GameObject.Instantiate(_projectile, _fromTransform.position, Quaternion.identity);
+        //proj.GetComponent<Projectile>().direction = _direction;
         Debug.Log($"Projétil lançado na direção {_direction}");
     }
 

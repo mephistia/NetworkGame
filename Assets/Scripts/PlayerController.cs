@@ -14,15 +14,15 @@ public class PlayerController : MonoBehaviour
             {
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePos.z = 0;
+                mousePos.y += 1;
                 Vector3 projDir = mousePos - transform.position;
                 timeStamp = Time.fixedTime + shootCooldown; // tempo de agora + cooldown
-                Debug.Log("Shot made");
                 ClientSend.PlayerShoot(projDir);
 
             }
             else
             {
-                Debug.Log("Shot is in cooldown!");
+                Debug.Log("Shot is on cooldown!");
             }
 
         }
