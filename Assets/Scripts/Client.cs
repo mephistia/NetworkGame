@@ -38,13 +38,6 @@ public class Client : MonoBehaviour
             Destroy(this);
         }
     }
-
-    private void Start()
-    {
-        tcp = new TCP();
-        udp = new UDP();
-    }
-
     // para desconectar no editor:
     private void OnApplicationQuit()
     {
@@ -55,6 +48,9 @@ public class Client : MonoBehaviour
 
     public void ConnectToServer()
     {
+        tcp = new TCP();
+        udp = new UDP();
+
         InitializeClientData();
 
         isConnected = true;
@@ -301,14 +297,19 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             {(int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
             {(int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
-            {(int)ServerPackets.playerVelocity, ClientHandle.PlayerVelocity },
+            //{(int)ServerPackets.playerVelocity, ClientHandle.PlayerVelocity },
             {(int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
             {(int)ServerPackets.playerHealth, ClientHandle.PlayerHealth },
             {(int)ServerPackets.playerRespawned, ClientHandle.PlayerRespawned },
             {(int)ServerPackets.spawnProjectile, ClientHandle.SpawnProjectile },
             {(int)ServerPackets.projectilePosition, ClientHandle.ProjectilePosition },
-            {(int)ServerPackets.projectileDamaged, ClientHandle.ProjectileDamaged }
+            {(int)ServerPackets.projectileDamaged, ClientHandle.ProjectileDamaged },
+            {(int)ServerPackets.spawnEnemy, ClientHandle.SpawnEnemy },
+            {(int)ServerPackets.enemyPosition, ClientHandle.EnemyPosition },
+            {(int)ServerPackets.enemyHealth, ClientHandle.EnemyHealth },
+            {(int)ServerPackets.statueHealth, ClientHandle.StatueHealth }
         };
+
         Debug.Log("Initialized packets.");
 
     }

@@ -1,22 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class PlayerController : MonoBehaviour
 {
-    private float timeStamp = 0f;
-    private float shootCooldown = 1f;
+    public float[] timeStamps = new float[4];
+    public float[] skillsCooldown = new float[4];
+
+    public bool[] isCoolingDown = new bool[4];
+
+    private void Start()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            isCoolingDown[i] = false;
+        }
+
+        skillsCooldown[0] = 3f;
+        skillsCooldown[1] = 2f;
+        skillsCooldown[2] = 3f;
+        skillsCooldown[3] = 2f;
+    }
+
     private void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            if (timeStamp <= Time.fixedTime)
+            if (timeStamps[0] <= Time.fixedTime)
             {
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePos.z = 0;
                 mousePos.y += 1;
                 Vector3 projDir = mousePos - transform.position;
-                timeStamp = Time.fixedTime + shootCooldown; // tempo de agora + cooldown
+                timeStamps[0] = Time.fixedTime + skillsCooldown[0]; // tempo de agora + cooldown
+                isCoolingDown[0] = true;
+
                 ClientSend.PlayerShoot(projDir);
 
             }
@@ -26,6 +45,25 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (timeStamps[i] <= Time.fixedTime)
+            {
+                isCoolingDown[i] = false;
+                if (i == 0)
+                    Debug.Log($"Skill {i} is available");
+            }
+            else
+            {
+                if (i == 0)
+                    Debug.Log($"Skill {i} is cooling down.");
+            }
+        }
+
+
+
+
     }
 
     private void FixedUpdate()
@@ -51,7 +89,6 @@ public class PlayerController : MonoBehaviour
             float angle = Mathf.Atan2(mousePos.x - objPos.x, mousePos.y - objPos.y) * Mathf.Rad2Deg;
 
             ClientSend.PlayerRotation(angle);
-
             ClientSend.PlayerMovement(_inputs);
         }
         

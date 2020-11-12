@@ -11,17 +11,69 @@ public class PlayerManager : GameCharacter
     public float currentLifes;
     public float maxLifes;
 
-    public void Initialize(int _id, string _username)
+    private Vector3 velocity = Vector3.zero;
+    private Vector3 newPosition = Vector3.zero;
+    private Quaternion newRotation = Quaternion.identity;
+
+    private float lastTime = 0f;
+
+    private Rigidbody2D rb2d;
+
+    public void Initialize(int _id, string _username, float _maxHealth)
     {
         id = _id;
+        Debug.Log($"Initialized player ID: {id}");
         username = _username;
+        maxHealth = _maxHealth;
         currentLifes = maxLifes;
+        health = maxHealth;
+        healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+        healthBarBG.sizeDelta = healthBar.sizeDelta;
     }
-    
 
     public void Respawn()
     {
         model.enabled = true;
         SetHealth(maxHealth);
+    }
+
+    // para inicializar
+    public void SetPosition(Vector3 _position)
+    {
+        newPosition = _position;
+        transform.position = _position;
+        lastTime = Time.time;
+    }
+    public void SetRotation(Quaternion _rotation)
+    {
+        newRotation = _rotation;
+        transform.rotation = _rotation;
+        lastTime = Time.time;
+    }
+
+
+    public void NextPosition(Vector3 _position)
+    {
+        newPosition = _position;
+        lastTime = Time.time;
+    }
+
+    public void NextRotation(Quaternion _rotation)
+    {
+        newRotation = _rotation;
+        lastTime = Time.time;
+    }
+
+    private void Start()
+    {
+        SetPosition(transform.position);
+        SetRotation(transform.rotation);
+    }
+    private void FixedUpdate()
+    {
+        transform.rotation = newRotation;
+
+        // suavizar até a posição recebida do server
+        transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, Time.fixedDeltaTime);
     }
 }

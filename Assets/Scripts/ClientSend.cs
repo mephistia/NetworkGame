@@ -37,6 +37,7 @@ public class ClientSend : MonoBehaviour
         using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
         {
             _packet.Write(_inputs.Length);
+
             foreach (bool _input in _inputs)
             {
                 _packet.Write(_input);
@@ -51,7 +52,6 @@ public class ClientSend : MonoBehaviour
         using (Packet _packet = new Packet((int)ClientPackets.playerRotation))
         {
             _packet.Write(_angle);
-
             SendUDPData(_packet);
         }
     }

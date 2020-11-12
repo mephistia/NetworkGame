@@ -9,13 +9,19 @@ public class GameCharacter : MonoBehaviour
 
     public SpriteRenderer model;
 
+    public RectTransform healthBar, healthBarBG;
+
     private void Start()
     {
         health = maxHealth;
     }
-    public void SetHealth(float _health)
+    public virtual void SetHealth(float _health)
     {
         health = _health;
+
+        // reduz o tamanho em x
+        healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+
         if (health <= 0f)
         {
             Die();
