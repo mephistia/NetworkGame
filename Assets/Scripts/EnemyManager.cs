@@ -54,9 +54,12 @@ public class EnemyManager : GameCharacter
 
         if (health <= 0f)
         {
-            GameManager.enemies.Remove(id);
             // animação?
             //...
+            if (GameManager.enemies.ContainsKey(id))
+                GameManager.enemies.Remove(id);
+
+            Debug.Log($"Destroyed enemy {id}");
             Destroy(gameObject);
         }
     }

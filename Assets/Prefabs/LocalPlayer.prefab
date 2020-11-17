@@ -353,8 +353,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -582,6 +582,7 @@ MonoBehaviour:
   username: 
   currentLifes: 0
   maxLifes: 3
+  tankSprite: {fileID: 21300000, guid: 516467bf2f3974d45a9b62f30ae1a527, type: 3}
 --- !u!114 &7919644789667935123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,7 +595,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda36b180783ca147a4871600cce0c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  predictRotation: {x: 0, y: 0, z: 0, w: 1}
+  timeStamps:
+  - 0
+  - 0
+  - 0
+  - 0
+  skillsCooldown:
+  - 0
+  - 0
+  - 0
+  - 0
+  energyCount: 0
 --- !u!212 &1311635084465043351
 SpriteRenderer:
   m_ObjectHideFlags: 0

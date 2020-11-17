@@ -15,20 +15,25 @@ public class PlayerManager : GameCharacter
     private Vector3 newPosition = Vector3.zero;
     private Quaternion newRotation = Quaternion.identity;
 
-    private float lastTime = 0f;
-
-    private Rigidbody2D rb2d;
+    public Sprite tankSprite;
 
     public void Initialize(int _id, string _username, float _maxHealth)
     {
         id = _id;
-        Debug.Log($"Initialized player ID: {id}");
         username = _username;
         maxHealth = _maxHealth;
         currentLifes = maxLifes;
         health = maxHealth;
-        healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
-        healthBarBG.sizeDelta = healthBar.sizeDelta;
+
+        // se for jogador tank
+        if (id == 2)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = tankSprite;
+        }
+
+        // corrigir tamanho da barra
+        healthBar.sizeDelta = new Vector2(health / maxHealth * 100, healthBar.sizeDelta.y);
+        healthBarBG.sizeDelta = healthBar.sizeDelta;      
     }
 
     public void Respawn()
@@ -42,26 +47,22 @@ public class PlayerManager : GameCharacter
     {
         newPosition = _position;
         transform.position = _position;
-        lastTime = Time.time;
     }
     public void SetRotation(Quaternion _rotation)
     {
         newRotation = _rotation;
         transform.rotation = _rotation;
-        lastTime = Time.time;
     }
 
 
     public void NextPosition(Vector3 _position)
     {
         newPosition = _position;
-        lastTime = Time.time;
     }
 
     public void NextRotation(Quaternion _rotation)
     {
         newRotation = _rotation;
-        lastTime = Time.time;
     }
 
     private void Start()

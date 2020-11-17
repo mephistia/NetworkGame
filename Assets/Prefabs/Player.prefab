@@ -291,8 +291,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -536,7 +536,6 @@ GameObject:
   - component: {fileID: 7831138648442092544}
   - component: {fileID: 8799193773777119156}
   - component: {fileID: 5302257830381361270}
-  - component: {fileID: 849449235926178872}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -581,6 +580,7 @@ MonoBehaviour:
   username: 
   currentLifes: 0
   maxLifes: 3
+  tankSprite: {fileID: 21300000, guid: 516467bf2f3974d45a9b62f30ae1a527, type: 3}
 --- !u!212 &5302257830381361270
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -631,24 +631,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &849449235926178872
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9084173944013873242}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 5
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4

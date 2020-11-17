@@ -15,7 +15,6 @@ namespace GameServer
         spawnPlayer,
         playerPosition,
         playerRotation,
-        //playerVelocity,
         playerDisconnected,
         playerHealth,
         playerRespawned,
@@ -25,7 +24,13 @@ namespace GameServer
         spawnEnemy,
         enemyPosition,
         enemyHealth,
-        statueHealth
+        statueHealth,
+        spawnEnergy,
+        despawnEnergy,
+        energyPickedUp,
+        spawnProjectileSkill,
+        tankAttacked,
+        spawnProjectileTank
     }
 
     // Do cliente para server
@@ -34,7 +39,11 @@ namespace GameServer
         welcomeReceived = 1,
         playerMovement,
         playerShoot,
-        playerRotation
+        playerRotation,
+        playerShootSkill,
+        playerHealingSelf,
+        playerHealingStatue,
+        playerTankSkill
     }
 
 

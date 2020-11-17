@@ -7,63 +7,73 @@ public class PlayerController : MonoBehaviour
 {
     public float[] timeStamps = new float[4];
     public float[] skillsCooldown = new float[4];
+    public int energyCount = 0;
 
-    public bool[] isCoolingDown = new bool[4];
+    private float pressedTime = 0f;
 
     private void Start()
     {
-        for (int i = 0; i < 4; i++)
+        if (Client.instance.myId == 1)
         {
-            isCoolingDown[i] = false;
+            // cooldowns de atirador
+            skillsCooldown[0] = .3f;
+            skillsCooldown[1] = 5f;
+            skillsCooldown[2] = 8f;
+            skillsCooldown[3] = 12.5f;
+        }
+        else
+        {
+            // cooldowns de tank
+            skillsCooldown[0] = 1.2f;
+            skillsCooldown[1] = 5f;
+            skillsCooldown[2] = 8f;
+            skillsCooldown[3] = 12.5f;
         }
 
-        skillsCooldown[0] = 3f;
-        skillsCooldown[1] = 2f;
-        skillsCooldown[2] = 3f;
-        skillsCooldown[3] = 2f;
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             if (timeStamps[0] <= Time.fixedTime)
             {
-                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                mousePos.z = 0;
-                mousePos.y += 1;
-                Vector3 projDir = mousePos - transform.position;
+                Vector3 fire1Dir = CalculateShotDirection();
                 timeStamps[0] = Time.fixedTime + skillsCooldown[0]; // tempo de agora + cooldown
-                isCoolingDown[0] = true;
 
-                ClientSend.PlayerShoot(projDir);
-
+                ClientSend.PlayerShoot(fire1Dir);
             }
-            else
-            {
-                Debug.Log("Shot is on cooldown!");
-            }
-
         }
 
-        for (int i = 0; i < 4; i++)
+        if (Input.GetButtonDown("Fire2") && Client.instance.myId == 1)
+        {            
+            if (timeStamps[1] <= Time.fixedTime)
+            {                
+                timeStamps[1] = Time.fixedTime + skillsCooldown[1]; // tempo de agora + cooldown
+                Vector3 fire2Dir = CalculateShotDirection();
+               
+                ClientSend.PlayerShootSkill(fire2Dir);
+            }            
+        }
+
+        // tank pressiona
+        if (Input.GetButton("Fire2") && Client.instance.myId == 2)
         {
-            if (timeStamps[i] <= Time.fixedTime)
-            {
-                isCoolingDown[i] = false;
-                if (i == 0)
-                    Debug.Log($"Skill {i} is available");
-            }
-            else
-            {
-                if (i == 0)
-                    Debug.Log($"Skill {i} is cooling down.");
-            }
+            pressedTime += Time.deltaTime;
         }
 
+        if (Input.GetButtonUp("Fire2") && Client.instance.myId == 2)
+        {
+            if (timeStamps[1] <= Time.fixedTime)
+            {
+                timeStamps[1] = Time.fixedTime + skillsCooldown[1]; // tempo de agora + cooldown
+                Vector3 fire2Dir = CalculateShotDirection();
 
+                ClientSend.PlayerTankSkill(fire2Dir, pressedTime);
+            }
 
-
+            pressedTime = 0f;
+        }
     }
 
     private void FixedUpdate()
@@ -92,5 +102,13 @@ public class PlayerController : MonoBehaviour
             ClientSend.PlayerMovement(_inputs);
         }
         
+    }
+
+    private Vector3 CalculateShotDirection()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        mousePos.y += 1;
+        return mousePos - transform.position;        
     }
 }

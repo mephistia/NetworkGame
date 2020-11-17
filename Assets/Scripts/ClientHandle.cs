@@ -12,7 +12,7 @@ public class ClientHandle : MonoBehaviour
         string _msg = _packet.ReadString();
         int _myId = _packet.ReadInt();
 
-        Debug.Log($"Message from server: {_msg}");
+        //Debug.Log($"Message from server: {_msg}");
         Client.instance.myId = _myId;
 
         // enviar o ack
@@ -80,7 +80,7 @@ public class ClientHandle : MonoBehaviour
     {
         int _projectileId = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
-        int _byPlayer = _packet.ReadInt();
+        //int _byPlayer = _packet.ReadInt();
 
         GameManager.instance.SpawnProjectile(_projectileId, _position);
     }
@@ -100,8 +100,8 @@ public class ClientHandle : MonoBehaviour
         Vector3 _position = _packet.ReadVector3();
         Vector3 _direction = _packet.ReadVector3();
         string _tag = _packet.ReadString();
-
-        GameManager.projectiles[_projectileId].DamageVisualFeedback(_position,_direction,_tag);
+        if (GameManager.projectiles.TryGetValue(_projectileId, out ProjectileManager _projectile))
+            _projectile.DamageVisualFeedback(_position,_direction,_tag);
     }
 
     // INIMIGOS
@@ -127,8 +127,8 @@ public class ClientHandle : MonoBehaviour
     {
         int _enemyId = _packet.ReadInt();
         float _health = _packet.ReadFloat();
-
-        GameManager.enemies[_enemyId].SetHealth(_health);
+        if (GameManager.enemies.TryGetValue(_enemyId, out EnemyManager _enemy))
+            _enemy.SetHealth(_health);
     }
 
     public static void StatueHealth(Packet _packet)
@@ -138,4 +138,56 @@ public class ClientHandle : MonoBehaviour
         GameManager.statueManager.SetHealth(_health);
     }
 
+
+    public static void SpawnEnergy(Packet _packet)
+    {
+        int _energyID = _packet.ReadInt();
+        Vector3 _position = _packet.ReadVector3();
+        float _timeToDestroy = _packet.ReadFloat();
+
+        GameManager.instance.SpawnEnergy(_energyID, _position, _timeToDestroy);
+    }
+
+    public static void DespawnEnergy(Packet _packet)
+    {
+        int _energyID = _packet.ReadInt();
+
+        if (GameManager.energies.TryGetValue(_energyID, out EnergyManager _energy))
+            _energy.Despawn();
+    }
+
+    public static void EnergyPickedUp(Packet _packet)
+    {
+        int _playerID = _packet.ReadInt();
+
+        // confirmar
+        if (_playerID == Client.instance.myId)
+            UIManager.instance.AddEnergyUI();
+    }
+
+    public static void SpawnProjectileSkill(Packet _packet)
+    {
+        int _projectileId = _packet.ReadInt();
+        Vector3 _position = _packet.ReadVector3();
+        int _byPlayer = _packet.ReadInt();
+
+        GameManager.instance.SpawnProjectileSkill(_projectileId, _position);
+    }
+
+    public static void SpawnProjectileTank(Packet _packet)
+    {
+        int _projectileId = _packet.ReadInt();
+        Vector3 _position = _packet.ReadVector3();
+        int _byPlayer = _packet.ReadInt();
+
+        GameManager.instance.SpawnProjectileTank(_projectileId, _position);
+    }
+
+
+    public static void TankAttacked(Packet _packet)
+    {
+        Vector3 _tankAttackPosition = _packet.ReadVector3();
+
+        GameManager.instance.SpawnTankAttack(_tankAttackPosition);
+    }
 }

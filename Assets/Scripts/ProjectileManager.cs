@@ -7,7 +7,7 @@ public class ProjectileManager : MonoBehaviour
 {
     public int id;
     public GameObject dmgVisualFeedback;
-    public Material blood;
+    public Material bloodMaterial;
 
     public void Initialize(int _id)
     {
@@ -21,10 +21,13 @@ public class ProjectileManager : MonoBehaviour
 
         if (_tag == "Enemy")
         {
-            _visualInstance.GetComponentInChildren<SpriteRenderer>().color = new Color(255, 90, 90);
+            _visualInstance.GetComponentInChildren<SpriteRenderer>().material = bloodMaterial;
+            Debug.Log($"Hit enemy");
         }
 
-        GameManager.projectiles.Remove(id);
+        if (GameManager.projectiles.ContainsKey(id))
+            GameManager.projectiles.Remove(id);
+        
         Destroy(gameObject);
     }
 

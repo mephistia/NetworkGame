@@ -65,5 +65,27 @@ public class ClientSend : MonoBehaviour
             SendUDPData(_packet);
         }
     }
+
+    public static void PlayerShootSkill(Vector3 _facing)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerShootSkill))
+        {
+            _packet.Write(_facing);
+
+            SendUDPData(_packet);
+        }
+    }
+
+    public static void PlayerTankSkill(Vector3 _facing, float _pressedTime)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerShootSkill))
+        {
+            _packet.Write(_facing);
+            _packet.Write(_pressedTime);
+
+            SendUDPData(_packet);
+        }
+    }
+
     #endregion
 }

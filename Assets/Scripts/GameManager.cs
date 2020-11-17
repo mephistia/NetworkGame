@@ -11,12 +11,17 @@ public class GameManager : MonoBehaviour
     public static Dictionary<int, PlayerManager> players = new Dictionary<int, PlayerManager>();
     public static Dictionary<int, ProjectileManager> projectiles = new Dictionary<int, ProjectileManager>();
     public static Dictionary<int, EnemyManager> enemies = new Dictionary<int, EnemyManager>();
+    public static Dictionary<int, EnergyManager> energies = new Dictionary<int, EnergyManager>();
 
     public GameObject localPlayerPrefab;
     public GameObject playerPrefab;
     public GameObject projectilePrefab;
+    public GameObject projectileSkillPrefab;
+    public GameObject projectileTankPrefab;
     public GameObject enemyPrefab;
+    public GameObject energyPrefab;
     public GameObject statue;
+    public GameObject tankAttackEffect;
     public static StatueManager statueManager;
 
     private GameObject virtualCamera;
@@ -77,4 +82,29 @@ public class GameManager : MonoBehaviour
         enemies.Add(_id, _enemy.GetComponent<EnemyManager>());
     }
 
+    public void SpawnEnergy(int _id, Vector3 _position, float _timeToDestroy)
+    {
+        GameObject _energy = Instantiate(energyPrefab, _position, Quaternion.identity);
+        _energy.GetComponent<EnergyManager>().Initialize(_id, _timeToDestroy);
+        energies.Add(_id, _energy.GetComponent<EnergyManager>());
+    }
+
+    public void SpawnProjectileSkill(int _id, Vector3 _position)
+    {
+        GameObject _projectileSkill = Instantiate(projectileSkillPrefab, _position, Quaternion.identity);
+        _projectileSkill.GetComponent<ProjectileManager>().Initialize(_id);
+        projectiles.Add(_id, _projectileSkill.GetComponent<ProjectileManager>());
+    }
+
+    public void SpawnProjectileTank(int _id, Vector3 _position)
+    {
+        GameObject _projectileTank = Instantiate(projectileTankPrefab, _position, Quaternion.identity);
+        _projectileTank.GetComponent<ProjectileManager>().Initialize(_id);
+        projectiles.Add(_id, _projectileTank.GetComponent<ProjectileManager>());
+    }
+
+    public void SpawnTankAttack(Vector3 _position)
+    {
+        Instantiate(tankAttackEffect, _position, Quaternion.identity);
+    }
 }

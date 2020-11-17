@@ -297,7 +297,6 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             {(int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
             {(int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
-            //{(int)ServerPackets.playerVelocity, ClientHandle.PlayerVelocity },
             {(int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
             {(int)ServerPackets.playerHealth, ClientHandle.PlayerHealth },
             {(int)ServerPackets.playerRespawned, ClientHandle.PlayerRespawned },
@@ -307,7 +306,12 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.spawnEnemy, ClientHandle.SpawnEnemy },
             {(int)ServerPackets.enemyPosition, ClientHandle.EnemyPosition },
             {(int)ServerPackets.enemyHealth, ClientHandle.EnemyHealth },
-            {(int)ServerPackets.statueHealth, ClientHandle.StatueHealth }
+            {(int)ServerPackets.statueHealth, ClientHandle.StatueHealth },
+            {(int)ServerPackets.spawnEnergy, ClientHandle.SpawnEnergy },
+            {(int)ServerPackets.despawnEnergy, ClientHandle.DespawnEnergy },
+            {(int)ServerPackets.energyPickedUp, ClientHandle.EnergyPickedUp },
+            {(int)ServerPackets.spawnProjectileSkill, ClientHandle.SpawnProjectileSkill },
+            {(int)ServerPackets.tankAttacked, ClientHandle.TankAttacked }
         };
 
         Debug.Log("Initialized packets.");
