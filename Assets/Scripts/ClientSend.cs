@@ -62,7 +62,7 @@ public class ClientSend : MonoBehaviour
         {
             _packet.Write(_facing);
 
-            SendUDPData(_packet);
+            SendTCPData(_packet);
         }
     }
 
@@ -72,7 +72,7 @@ public class ClientSend : MonoBehaviour
         {
             _packet.Write(_facing);
 
-            SendUDPData(_packet);
+            SendTCPData(_packet);
         }
     }
 
@@ -83,7 +83,20 @@ public class ClientSend : MonoBehaviour
             _packet.Write(_facing);
             _packet.Write(_pressedTime);
 
-            SendUDPData(_packet);
+            SendTCPData(_packet);
+        }
+    }
+
+    public static void AskCombine(PlayerController _player)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.askCombine))
+        {
+            if (_player.TryGetComponent<PlayerManager>(out PlayerManager _playerM))
+            {
+                _packet.Write(_playerM.id);
+
+                SendTCPData(_packet);
+            }
         }
     }
 

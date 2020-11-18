@@ -30,7 +30,10 @@ namespace GameServer
         energyPickedUp,
         spawnProjectileSkill,
         tankAttacked,
-        spawnProjectileTank
+        spawnProjectileTank,
+        showCombine,
+        waitingCombine,
+        isCombined
     }
 
     // Do cliente para server
@@ -43,7 +46,8 @@ namespace GameServer
         playerShootSkill,
         playerHealingSelf,
         playerHealingStatue,
-        playerTankSkill
+        playerTankSkill,
+        askCombine
     }
 
 

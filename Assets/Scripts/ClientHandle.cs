@@ -80,7 +80,6 @@ public class ClientHandle : MonoBehaviour
     {
         int _projectileId = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
-        //int _byPlayer = _packet.ReadInt();
 
         GameManager.instance.SpawnProjectile(_projectileId, _position);
     }
@@ -169,7 +168,6 @@ public class ClientHandle : MonoBehaviour
     {
         int _projectileId = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
-        int _byPlayer = _packet.ReadInt();
 
         GameManager.instance.SpawnProjectileSkill(_projectileId, _position);
     }
@@ -178,7 +176,6 @@ public class ClientHandle : MonoBehaviour
     {
         int _projectileId = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
-        int _byPlayer = _packet.ReadInt();
 
         GameManager.instance.SpawnProjectileTank(_projectileId, _position);
     }
@@ -189,5 +186,51 @@ public class ClientHandle : MonoBehaviour
         Vector3 _tankAttackPosition = _packet.ReadVector3();
 
         GameManager.instance.SpawnTankAttack(_tankAttackPosition);
+    }
+
+    public static void ShowCombine(Packet _packet)
+    {
+        int _playerID = _packet.ReadInt();
+        bool _show = _packet.ReadBool();
+
+        if (GameManager.players.TryGetValue(_playerID, out PlayerManager _player) && _player.TryGetComponent<PlayerController>(out PlayerController _localPlayer))
+        {
+            _localPlayer.showCombine = _show;            
+            UIManager.instance.combineUI.SetActive(_show);            
+        }
+
+    }
+
+    public static void WaitingCombine(Packet _packet)
+    {
+        int _playerID = _packet.ReadInt();
+        bool _waiting = _packet.ReadBool();
+
+        if (GameManager.players.TryGetValue(_playerID, out PlayerManager _player) && _player.TryGetComponent<PlayerController>(out PlayerController _localPlayer))
+        {
+            _localPlayer.waitingCombine = _waiting;
+            if (_waiting) // se for true, deixa em 0
+                UIManager.instance.combine.fillAmount = 0f;
+            // atualizar o timeStamps[4] quando receber o isCombined
+        }
+    }
+
+    public static void IsCombined(Packet _packet)
+    {
+        int _playerID = _packet.ReadInt();
+        bool _combined = _packet.ReadBool();
+
+        if (GameManager.players.TryGetValue(_playerID, out PlayerManager _player) && _player.TryGetComponent<PlayerController>(out PlayerController _localPlayer))
+        {
+            _localPlayer.isCombined = _combined;
+
+            if (_combined)
+            {
+                _localPlayer.timeStamps[4] = Time.fixedTime + _localPlayer.skillsCooldown[4]; // tempo de agora + cooldown
+            }
+
+            UIManager.instance.updateCombineCooldown = _combined; // atualizar ou não
+
+        }
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2741950154054233616}
   - component: {fileID: 6473727679871393820}
-  - component: {fileID: 1406314110248910610}
+  - component: {fileID: 6873315975955693780}
   m_Layer: 0
   m_Name: ProjectileSkill
   m_TagString: Untagged
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1406314110248910610
+--- !u!114 &6873315975955693780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 841545024453536282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 357bb1f7d6794144f85cae1c558edbf3, type: 3}
+  m_Script: {fileID: 11500000, guid: 289d999b5f32d43498355af6bc9f39f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0

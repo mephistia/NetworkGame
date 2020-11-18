@@ -310,7 +310,11 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.despawnEnergy, ClientHandle.DespawnEnergy },
             {(int)ServerPackets.energyPickedUp, ClientHandle.EnergyPickedUp },
             {(int)ServerPackets.spawnProjectileSkill, ClientHandle.SpawnProjectileSkill },
-            {(int)ServerPackets.tankAttacked, ClientHandle.TankAttacked }
+            {(int)ServerPackets.spawnProjectileTank, ClientHandle.SpawnProjectileTank },
+            {(int)ServerPackets.tankAttacked, ClientHandle.TankAttacked },
+            {(int)ServerPackets.showCombine, ClientHandle.ShowCombine },
+            {(int)ServerPackets.waitingCombine, ClientHandle.WaitingCombine },
+            {(int)ServerPackets.isCombined, ClientHandle.IsCombined },
         };
 
         Debug.Log("Initialized packets.");

@@ -8,14 +8,17 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
     public GameObject startMenu;
     public InputField usernameField;
-    public Image fire1, fire2, F, E;
+    public Image fire1, fire2, F, E, combine;
     public Image bgFire1, bgFire2;
     public Sprite tankFire1, tankFire2;
     public PlayerController player;
     public GameObject energyImgPrefab;
     public GameObject energyLayout;
+    public GameObject combineUI;
 
     private bool changedSprites = false;
+
+    public bool updateCombineCooldown = false;
     
     private void Awake()
     {
@@ -34,6 +37,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         fire1.fillAmount = fire2.fillAmount = F.fillAmount = E.fillAmount = 1f;
+        combineUI.SetActive(false);
     }
 
     public void ConnectToServer()
@@ -67,13 +71,17 @@ public class UIManager : MonoBehaviour
             bgFire1.sprite = fire1.sprite;
             bgFire2.sprite = fire2.sprite;
             changedSprites = true;
-            Debug.Log("Changed sprites");
         }
 
         fire1.fillAmount = CalcFill(CalcTime(0), 0);
         fire2.fillAmount = CalcFill(CalcTime(1), 1); 
 
-        // se tem
+        if (updateCombineCooldown)
+        {
+            combine.fillAmount = CalcFill(CalcTime(4), 4);
+        }
+
+        // se tem energia
         if (player.energyCount > 0)
         {
             F.fillAmount = CalcFill(CalcTime(2), 2);

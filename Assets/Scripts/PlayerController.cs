@@ -5,11 +5,13 @@ using UnityEngine.PlayerLoop;
 
 public class PlayerController : MonoBehaviour
 {
-    public float[] timeStamps = new float[4];
-    public float[] skillsCooldown = new float[4];
+    public float[] timeStamps = new float[5];
+    public float[] skillsCooldown = new float[5];
     public int energyCount = 0;
 
     private float pressedTime = 0f;
+
+    public bool showCombine = false, isCombined = false, waitingCombine = false;
 
     private void Start()
     {
@@ -20,14 +22,20 @@ public class PlayerController : MonoBehaviour
             skillsCooldown[1] = 5f;
             skillsCooldown[2] = 8f;
             skillsCooldown[3] = 12.5f;
+            skillsCooldown[4] = 2f;
         }
         else
         {
             // cooldowns de tank
-            skillsCooldown[0] = 1.2f;
+            skillsCooldown[0] = .7f;
             skillsCooldown[1] = 5f;
             skillsCooldown[2] = 8f;
             skillsCooldown[3] = 12.5f;
+            skillsCooldown[4] = 2f;
+        }
+
+        for (int i = 0; i < timeStamps.Length; i++){
+            timeStamps[i] = 0f;
         }
 
     }
@@ -57,9 +65,9 @@ public class PlayerController : MonoBehaviour
         }
 
         // tank pressiona
-        if (Input.GetButton("Fire2") && Client.instance.myId == 2)
+        if (Input.GetButtonDown("Fire2") && Client.instance.myId == 2)
         {
-            pressedTime += Time.deltaTime;
+            pressedTime = Time.time;
         }
 
         if (Input.GetButtonUp("Fire2") && Client.instance.myId == 2)
@@ -69,10 +77,19 @@ public class PlayerController : MonoBehaviour
                 timeStamps[1] = Time.fixedTime + skillsCooldown[1]; // tempo de agora + cooldown
                 Vector3 fire2Dir = CalculateShotDirection();
 
-                ClientSend.PlayerTankSkill(fire2Dir, pressedTime);
+                ClientSend.PlayerTankSkill(fire2Dir, Time.time - pressedTime);
             }
 
             pressedTime = 0f;
+        }
+
+        // só aceita se tiver mostrando os botões (dentro da área)
+        if (Input.GetButton("Jump") && showCombine)
+        {
+            if (timeStamps[4] <= Time.fixedTime && !waitingCombine)
+            {
+                ClientSend.AskCombine(this);
+            }
         }
     }
 

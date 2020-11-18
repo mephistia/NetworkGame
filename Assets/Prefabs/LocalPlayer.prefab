@@ -600,12 +600,17 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  - 0
   skillsCooldown:
   - 0
   - 0
   - 0
   - 0
+  - 0
   energyCount: 0
+  showCombine: 0
+  isCombined: 0
+  waitingCombine: 0
 --- !u!212 &1311635084465043351
 SpriteRenderer:
   m_ObjectHideFlags: 0
