@@ -1,2 +1,2 @@
 # NetworkGame
-Test game using network functions (multiplayer)
+Uni project using network functions (multiplayer)
